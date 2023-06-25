@@ -1,0 +1,16 @@
+<div class="details-container">
+  <div class="details-header">
+    <h1>Details Of {{ record?.name }}</h1>
+  </div>
+
+  <div class="details-content">
+    <p>Name: {{ record?.name }}</p>
+    <p>Email: {{ record?.email }}</p>
+    <p>Phone: {{ record?.phone }}</p>
+    <p>Address: {{ record?.address }}</p>
+  </div>
+
+  <div class="details-footer">
+    <button (click)="navigateTo()">Back</button>
+  </div>
+</div>

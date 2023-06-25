@@ -1,0 +1,102 @@
+<div class="users-container">
+  <div class="users-header">
+    <h1>Angular Assignment</h1>
+  </div>
+
+  <div class="users-content" *ngIf="showTable">
+    <div class="users-top">
+      <div class="users-search">
+        <div class="users-icon">
+          <img src="../../../assets/search.jpg" alt="Search Icon" />
+        </div>
+        <input
+          class="users-input"
+          type="email"
+          [(ngModel)]="searchEmail"
+          name="searchEmail"
+          placeholder="Search by Email Address"
+          (input)="search()"
+        />
+      </div>
+
+      <div class="users-button">
+        <button (click)="getForm()">CREATE</button>
+      </div>
+    </div>
+
+    <div class="users-table">
+      <table *ngIf="records.length !== 0">
+        <thead>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th></th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of records">
+            <td>{{ record.name }}</td>
+            <td>{{ record.email }}</td>
+            <td>{{ record.phone }}</td>
+            <td (click)="deleteRecord(record)">Delete</td>
+            <td>
+              <a routerLink="/users/{{ record.email }}">Details</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="users-error" *ngIf="records.length == 0">
+        <h2>Records are empty</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="users-create" *ngIf="showForm">
+    <form (submit)="createRecord()">
+      <h2>Fill The Details:</h2>
+
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="name"
+          name="name"
+          placeholder="Enter The Name"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Enter The Email"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="tel"
+          [(ngModel)]="phone"
+          name="phone"
+          placeholder="Enter The Phone Number"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <input
+          type="text"
+          [(ngModel)]="address"
+          name="address"
+          placeholder="Enter The Address"
+          required
+        />
+      </div>
+      <button type="submit">SUBMIT</button>
+
+      <div class="error" *ngIf="showError">
+        <h4>This record with same email exists</h4>
+      </div>
+    </form>
+  </div>
+</div>
